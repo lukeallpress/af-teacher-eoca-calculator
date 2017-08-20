@@ -3,6 +3,9 @@ console.log("JS successfully loaded")
 document.addEventListener('DOMContentLoaded', function(){
   var calculateButton = document.getElementById("calculateButton")
 
+  var resultsTable = document.getElementById("resultsTable")
+  resultsTable.style.visibility = "hidden"
+
   calculateButton.addEventListener("click", function(){
     console.log("button pressed")
     var grade = parseFloat(document.getElementById("grade").value)
@@ -16,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById("aMax").innerHTML = aMax
     document.getElementById("bMin").innerHTML = bMin
     document.getElementById("bMax").innerHTML = bMax
+    // show the table
+    resultsTable.style.visibility = "visible"
   })
 })
 
