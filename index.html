@@ -17,42 +17,40 @@
       <div class="row">
         <h1 class="text-center col">Student Grade Calculations</h1>
       </div>
+      <div class = "row">
+        <h6 class= "text-center col"><small>Enter your student's current grade in the field below and the resulting table will calculate the EOCA scores that will make each letter grade possible.</small></h3>
+      </div>
       <div class="row">
-        <div class="col">
+        <div class="text-center col">
           <input type="number" name="grade" value="" id="grade">
           <button type="button" name="button" id="calculateButton">Calculate!</button>
         </div>
       </div>
+      <br>
       <table class="table table-hover" id="resultsTable">
         <tr>
           <th>Grade</th>
-          <th>Min</th>
-          <th>Max</th>
+          <th>Range</th>
         </tr>
         <tr>
           <td>A</td>
-          <td id="aMin"></td>
-          <td id="aMax"></td>
+          <td id="aRange"></td>
         </tr>
         <tr>
           <td>B</td>
-          <td id="bMin"></td>
-          <td id="bMax"></td>
+          <td id="bRange"></td>
         </tr>
         <tr>
           <td>C</td>
-          <td id="cMin"></td>
-          <td id="cMax"></td>
+          <td id="cRange"></td>
         </tr>
         <tr>
           <td>D</td>
-          <td id="dMin"></td>
-          <td id="dMax"></td>
+          <td id="dRange"></td>
         </tr>
         <tr>
           <td>F</td>
-          <td id="fMin"></td>
-          <td id="fMax"></td>
+          <td id="fRange"></td>
         </tr>
       </table>
     </div>

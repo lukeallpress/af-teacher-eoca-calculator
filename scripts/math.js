@@ -6,31 +6,27 @@ document.addEventListener('DOMContentLoaded', function(){
   var resultsTable = document.getElementById("resultsTable")
   resultsTable.style.visibility = "hidden"
 
+  function calculateGrade(grade, min, max){
+    var response = "Not Possible"
+    if ((min - grade * 0.8) * 5 < 100 && (max - grade * 0.8) * 5 > 0) {
+      response = ((min - grade * 0.8) * 5 < 0) ? 0 : Math.round((min - grade * 0.8) * 5)
+      response += "% to "
+      response += ((max - grade * 0.8) * 5 > 100) ? "100%": Math.round((max - grade * .8) * 5) + "%"
+    }
+    console.log(Math.round(23.5))
+    return response
+  }
+
   calculateButton.addEventListener("click", function(){
     console.log("button pressed")
     var grade = parseFloat(document.getElementById("grade").value)
     console.log(grade)
-    var aMin = (90 - grade*.8)*5
-    var aMax = (100-grade*.8)*5
-    var bMin = (80 - grade*.8)*5
-    var bMax = (90 - grade*.8)*5
-    var cMin = (70 - grade*.8)*5
-    var cMax = (80 - grade*.8)*5
-    var dMin = (60 - grade*.8)*5
-    var dMax = (70 - grade*.8)*5
-    var fMin = (0 - grade*.8)*5
-    var fMax = (70 - grade*.8)*5
-    // Look up JS ternary statements later
-    document.getElementById("aMin").innerHTML = aMin
-    document.getElementById("aMax").innerHTML = aMax
-    document.getElementById("bMin").innerHTML = bMin
-    document.getElementById("bMax").innerHTML = bMax
-    document.getElementById("cMin").innerHTML = cMin
-    document.getElementById("cMax").innerHTML = cMax
-    document.getElementById("dMin").innerHTML = dMin
-    document.getElementById("dMax").innerHTML = dMax
-    document.getElementById("fMin").innerHTML = fMin
-    document.getElementById("fMax").innerHTML = fMax
+    // calculate ranges
+    document.getElementById("aRange").innerHTML = calculateGrade(grade,90,100)
+    document.getElementById("bRange").innerHTML = calculateGrade(grade,80,90)
+    document.getElementById("cRange").innerHTML = calculateGrade(grade,70,80)
+    document.getElementById("dRange").innerHTML = calculateGrade(grade,60,70)
+    document.getElementById("fRange").innerHTML = calculateGrade(grade,0,60)
     // show the table
     resultsTable.style.visibility = "visible"
   })
