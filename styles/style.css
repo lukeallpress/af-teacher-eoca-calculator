@@ -2,14 +2,14 @@ h1 {
   color: yellow;
 }
 
-table{
-    border: 1px solid black;
-}
-
 .table {
    text-align: center;
 }
 
 .table th {
    text-align: center;
+}
+
+.table-nonfluid {
+   width: auto !important;
 }

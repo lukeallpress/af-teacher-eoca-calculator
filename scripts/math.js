@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function(){
   var calculateButton = document.getElementById("calculateButton")
 
   var resultsTable = document.getElementById("resultsTable")
-  resultsTable.style.visibility = "hidden"
+  resultsTable.style.visibility = "visible"
+
+  //resultsTable.style.visibility = "hidden"
 
   function calculateGrade(grade, min, max){
     var response = "Not Possible"
