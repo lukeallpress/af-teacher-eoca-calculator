@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function calculateGrade(grade, min, max){
     var response = "Not Possible"
+    if (grade<0 || grade>110) {
+      return "Submit a valid grade"
+    }
     if ((min - grade * 0.8) * 5 < 100 && (max - grade * 0.8) * 5 > 0) {
       response = ((min - grade * 0.8) * 5 < 0) ? 0 : Math.round((min - grade * 0.8) * 5)
       response += "% to "
       response += ((max - grade * 0.8) * 5 > 100) ? "100%": Math.round((max - grade * .8) * 5) + "%"
     }
-    console.log(Math.round(23.5))
     return response
   }
 
