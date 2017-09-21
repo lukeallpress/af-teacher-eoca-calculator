@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function(){
       note.style.display = "block"
     } else {
       extra.style.display = "none"
+      note.style.display = "none"
     }
     makeTable()
   })
