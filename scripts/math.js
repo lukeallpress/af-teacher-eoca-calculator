@@ -1,59 +1,69 @@
 console.log("JS successfully loaded")
 
 document.addEventListener('DOMContentLoaded', function(){
-  // var calculateButton = document.getElementById("calculateButton")
-  document.getElementById("grade").defaultValue = "75";
-  document.getElementById("aRange").innerHTML = calculateGrade(75,90,100)
-  document.getElementById("bRange").innerHTML = calculateGrade(75,80,90)
-  document.getElementById("cRange").innerHTML = calculateGrade(75,70,80)
-  document.getElementById("dRange").innerHTML = calculateGrade(75,60,70)
-  document.getElementById("fRange").innerHTML = calculateGrade(75,0,60)
-  var resultsTable = document.getElementById("resultsTable")
-  resultsTable.style.visibility = "visible"
+  resultsTable.style.visibility = "hidden"
+  extra.style.display = "none"
+  note.style.display = "none"
 
-  //resultsTable.style.visibility = "hidden"
+  function makeTable() {
+    document.getElementById("aRange").innerHTML = calculateGrade(90,150)
+    document.getElementById("bRange").innerHTML = calculateGrade(80,90)
+    document.getElementById("cRange").innerHTML = calculateGrade(70,80)
+    document.getElementById("dRange").innerHTML = calculateGrade(60,70)
+    document.getElementById("fRange").innerHTML = calculateGrade(0,60)
+  }
 
-  function calculateGrade(grade, min, max){
+  function calculateGrade(min, max){
+    var grade = formgrade.value
+    var writingScore = writing.value
+    var weight = selection.value
     var response = "Not Possible"
     if (grade<0 || grade>110) {
       return "Submit a valid grade"
     }
-    if ((min - grade * 0.8) * 5 < 100 && (max - grade * 0.8) * 5 > 0) {
-      response = ((min - grade * 0.8) * 5 < 0) ? 0 : Math.round((min - grade * 0.8) * 5)
-      response += "% to "
-      response += ((max - grade * 0.8) * 5 > 100) ? "100%": Math.round((max - grade * .8) * 5) + "%"
+    if (weight == "Math") {
+      if ((min - grade + writingScore * 0.15) / 0.15 < 100 && (max - grade + writingScore * 0.15) / 0.15 > 0) {
+        response = ((min - grade + writingScore * 0.15) / 0.15 < 0) ? 0 : Math.round((min - grade + writingScore * 0.15) / 0.15)
+        response += "% to "
+        response += ((max - grade + writingScore * 0.15) / 0.15 > 100) ? 100 + "%": Math.round((max - grade + writingScore * 0.15) / 0.15) + "%"
+      }
+    } else if (weight == "English"){
+      if ((min - grade + writingScore * 0.1) / 0.1 < 100 && (max - grade + writingScore * 0.1) / 0.1 > 0) {
+        response = ((min - grade + writingScore * 0.1) / 0.1 < 0) ? 0 : Math.round((min - grade + writingScore * 0.1) / 0.1)
+        response += "% to "
+        response += ((max - grade + writingScore * 0.1) / 0.1 > 100) ? 100 + "%": Math.round((max - grade + writingScore * 0.1) / 0.1) + "%"
+      }
+    } else {
+      if ((min - grade * 0.8) * 5 < 100 && (max - grade * 0.8) * 5 > 0) {
+        response = ((min - grade * 0.8) * 5 < 0) ? 0 : Math.round((min - grade * 0.8) * 5)
+        response += "% to "
+        response += ((max - grade * 0.8) * 5 > 100) ? "100%": Math.round((max - grade * .8) * 5) + "%"
+      }
     }
     return response
   }
 
-  /*
-  calculateButton.addEventListener("click", function(){
-    console.log("button pressed")
-    var grade = parseFloat(document.getElementById("grade").value)
-    console.log(grade)
-    // calculate ranges
-    document.getElementById("aRange").innerHTML = calculateGrade(grade,90,100)
-    document.getElementById("bRange").innerHTML = calculateGrade(grade,80,90)
-    document.getElementById("cRange").innerHTML = calculateGrade(grade,70,80)
-    document.getElementById("dRange").innerHTML = calculateGrade(grade,60,70)
-    document.getElementById("fRange").innerHTML = calculateGrade(grade,0,60)
-    // show the table
-    resultsTable.style.visibility = "visible"
+  selection.addEventListener("change", function(){
+    console.log("weight changed")
+    if ((selection.value == "Math") || (selection.value == "English")) {
+      extra.style.display = "block"
+      note.style.display = "block"
+    } else {
+      extra.style.display = "none"
+    }
+    makeTable()
   })
-*/
 
-  grade.addEventListener("input", function(){
-    console.log("value changed")
-    var grade = parseFloat(document.getElementById("grade").value)
-    console.log(grade)
-    // calculate ranges
-    document.getElementById("aRange").innerHTML = calculateGrade(grade,90,100)
-    document.getElementById("bRange").innerHTML = calculateGrade(grade,80,90)
-    document.getElementById("cRange").innerHTML = calculateGrade(grade,70,80)
-    document.getElementById("dRange").innerHTML = calculateGrade(grade,60,70)
-    document.getElementById("fRange").innerHTML = calculateGrade(grade,0,60)
-    // show the table
+  formgrade.addEventListener("input", function(){
+    console.log("grade changed")
     resultsTable.style.visibility = "visible"
+    makeTable()
+  })
+
+  writing.addEventListener("input", function(){
+    console.log("writing score changed")
+    resultsTable.style.visibility = "visible"
+    makeTable()
   })
 
 })

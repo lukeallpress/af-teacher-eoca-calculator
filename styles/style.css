@@ -6,14 +6,6 @@
    text-align: center;
 }
 
-.table-nonfluid {
-   width: auto !important;
-}
-
-@media (max-width: 991px) {
-  text-align: center;
-}
-
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
