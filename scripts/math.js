@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var writingScore = writing.value
     var weight = selection.value
     var response = "Not Possible"
-    if (grade<0 || grade>110) {
+    if (grade<0 || grade>110 || writingScore<0 || writingScore>110) {
       return "Submit a valid grade"
     }
     if (weight == "Math") {
