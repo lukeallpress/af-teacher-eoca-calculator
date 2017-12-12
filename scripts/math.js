@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
   resultsTable.style.visibility = "hidden"
   extra.style.display = "none"
   note.style.display = "none"
+  midterm.style.display = "none"
 
   function makeTable() {
     document.getElementById("aRange").innerHTML = calculateGrade(90,150)
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var grade = formgrade.value
     var writingScore = writing.value
     var weight = selection.value
+    var mte = mteWeight.value
     var response = "Not Possible"
     if (grade<0 || grade>110 || writingScore<0 || writingScore>110) {
       return "Submit a valid grade"
@@ -33,11 +35,17 @@ document.addEventListener('DOMContentLoaded', function(){
         response += "% to "
         response += ((max - grade + writingScore * 0.1) / 0.1 > 100) ? 100 + "%": Math.round((max - grade + writingScore * 0.1) / 0.1) + "%"
       }
+    } else if (weight == "MTE") {
+      if ((min - grade * (1 - mte/100)) * 100/mte < 100 && (max - grade * (1 - mte/100)) * 100/mte > 0) {
+        response = ((min - grade * (1 - mte/100)) * 100/mte < 0) ? 0 : Math.round((min - grade * (1 - mte/100)) * 100/mte)
+        response += "% to "
+        response += ((max - grade * (1 - mte/100)) * 100/mte > 100) ? "100%": Math.round((max - grade * (1 - mte/100)) * 100/mte) + "%"
+      }
     } else {
       if ((min - grade * 0.8) * 5 < 100 && (max - grade * 0.8) * 5 > 0) {
         response = ((min - grade * 0.8) * 5 < 0) ? 0 : Math.round((min - grade * 0.8) * 5)
         response += "% to "
-        response += ((max - grade * 0.8) * 5 > 100) ? "100%": Math.round((max - grade * .8) * 5) + "%"
+        response += ((max - grade * 0.8) * 5 > 100) ? "100%": Math.round((max - grade * 0.8) * 5) + "%"
       }
     }
     return response
@@ -45,12 +53,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
   selection.addEventListener("change", function(){
     console.log("weight changed")
+    extra.style.display = "none"
+    note.style.display = "none"
+    midterm.style.display = "none"
+    note2.style.display = "none"
+    resultsTable.style.visibility = "visible"
     if ((selection.value == "Math") || (selection.value == "English")) {
       extra.style.display = "block"
       note.style.display = "block"
-    } else {
-      extra.style.display = "none"
-      note.style.display = "none"
+    } else if (selection.value == "MTE") {
+        midterm.style.display = "block"
+        note2.style.display = "block"
     }
     makeTable()
   })
@@ -63,6 +76,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
   writing.addEventListener("input", function(){
     console.log("writing score changed")
+    resultsTable.style.visibility = "visible"
+    makeTable()
+  })
+
+  mteWeight.addEventListener("input", function(){
+    console.log("mte weight changed")
     resultsTable.style.visibility = "visible"
     makeTable()
   })
