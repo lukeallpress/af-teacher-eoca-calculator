@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
   resultsTable.style.visibility = "hidden"
   extra.style.display = "none"
   note.style.display = "none"
+  note2.style.display = "none"
   midterm.style.display = "none"
 
   function makeTable() {
